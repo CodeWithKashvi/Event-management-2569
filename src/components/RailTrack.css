@@ -1,0 +1,63 @@
+/* Sits in the top of the tilted poster conveyor, so it shares its perspective. */
+.rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Rails: a wide stroke with a narrower background-coloured stroke on top leaves two thin parallel lines. */
+.rail__sleepers {
+  stroke: var(--track-sleeper);
+  stroke-width: 26;
+  stroke-dasharray: 4 11;
+}
+
+.rail__rails {
+  stroke: var(--track-rail);
+  stroke-width: 15;
+}
+
+.rail__bed {
+  stroke: var(--bg);
+  stroke-width: 10;
+}
+
+.rail__car {
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+
+.rail__car rect:first-child {
+  fill: var(--train-coach);
+}
+
+.rail__car--engine rect:first-child {
+  fill: var(--marigold);
+}
+
+.rail__stripe {
+  fill: var(--marigold);
+}
+
+.rail__car--engine .rail__stripe {
+  fill: var(--rani);
+}
+
+.rail__window {
+  fill: rgb(255 255 255 / 0.85);
+}
+
+.rail__car--engine .rail__window {
+  fill: #15162e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail__train {
+    display: none;
+  }
+}

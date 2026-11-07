@@ -1,0 +1,517 @@
+/* ============ Hero ============ */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-top: clamp(1.75rem, 4vw, 3rem);
+}
+
+/* A faint dot grid, like the LED dots on a station display, fading out behind the text. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: radial-gradient(circle at 1px 1px, var(--dot) 1.1px, transparent 1.6px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 38%, transparent 30%, #000 90%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 38%, transparent 30%, #000 90%);
+}
+
+.hero__copy {
+  display: grid;
+  justify-items: start;
+}
+
+/* Styled like the yellow station signboards on every Indian platform. */
+.hero__sign {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 0.75rem;
+  padding: 0.35rem 0.9rem 0.3rem;
+  border-radius: 8px;
+  background: #ffd21f;
+  box-shadow: inset 0 0 0 2px #14142b, 0 8px 20px -10px rgb(160 120 0 / 0.6);
+  color: #14142b;
+  font: 600 0.98rem / 1.35 var(--font-body);
+}
+
+.hero__sign [lang='hi'] {
+  font-size: 1.05rem;
+}
+
+.hero__sign-en {
+  padding-left: 0.75rem;
+  border-left: 1.5px solid #14142b;
+}
+
+/* Editorial headline: line one hugs the left, line two is pushed to the right,
+   and a live "next departure" chip fills the space beside it. */
+.hero__head {
+  position: relative;
+  width: 100%;
+  margin: 1.1rem 0 0;
+}
+
+.hero__title {
+  display: grid;
+  gap: 0.06em;
+  font: 800 clamp(2.6rem, 6.2vw, 6rem) / 1 var(--font-display);
+  letter-spacing: -0.035em;
+}
+
+.hero__l1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1em 0.3em;
+}
+
+.hero__l2 {
+  justify-self: end;
+}
+
+.hero__line {
+  display: inline-block;
+}
+
+/* In the hero, the chip sits in the gap beside the headline's second line. */
+.hero__head .next-chip {
+  position: absolute;
+  bottom: 0.4rem;
+  left: 0;
+  max-width: min(420px, 40%);
+}
+
+/* The flipping word: big physical flaps in the category's colour. */
+.hero__flapword {
+  display: inline-flex;
+  padding: clamp(5px, 0.7vw, 9px);
+  border: 1px solid var(--board-frame);
+  border-radius: clamp(12px, 1.4vw, 20px);
+  background: var(--board-bg);
+  box-shadow: var(--shadow-lg);
+  letter-spacing: 0;
+}
+
+.hero__flapword .flap {
+  --cell-w: clamp(27px, 4.6vw, 60px);
+  --gap: clamp(2px, 0.35vw, 5px);
+}
+
+.hero__flapword .flap__cell {
+  border-radius: clamp(4px, 0.6vw, 9px);
+  color: var(--cat-ink);
+  font-size: calc(var(--cell-w) * 1.05);
+  transition: color 0.4s;
+}
+
+/* Below the headline: description on the left, search on the right, on a thin rule. */
+.hero__row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: 1.5rem clamp(2rem, 6vw, 6rem);
+  width: 100%;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid var(--line);
+}
+
+.hero__lede {
+  max-width: 42ch;
+  color: var(--ink-2);
+  font-size: clamp(1.08rem, 1.5vw, 1.25rem);
+}
+
+.hero__find {
+  display: grid;
+  justify-items: end;
+}
+
+.hero__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: min(620px, 100%);
+  padding: 7px 7px 7px 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  text-align: left;
+  transition: box-shadow 0.25s, border-color 0.25s;
+}
+
+.hero__search:has(input:focus-visible) {
+  border-color: var(--ring);
+  box-shadow: var(--shadow-lg), 0 0 0 4px color-mix(in srgb, var(--ring) 22%, transparent);
+}
+
+.hero__search svg {
+  flex: none;
+  color: var(--ink-2);
+}
+
+.hero__search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 0.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 1.05rem;
+  outline: none;
+}
+
+.hero__search input::placeholder {
+  color: var(--ink-3);
+}
+
+.hero__popular {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.hero__popular > span {
+  flex: none;
+}
+
+.hero__popular ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.hero__popular a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.hero__popular a:hover {
+  border-color: var(--ink);
+  background: var(--surface);
+}
+
+.hero__foot {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1.25rem;
+}
+
+.hero__pause {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 36px;
+  padding: 0 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hero__pause:hover {
+  color: var(--ink);
+}
+
+/* Tablets and phones: one left-aligned column, chip under the headline. */
+@media (max-width: 980px) {
+  .hero__l2 {
+    justify-self: start;
+  }
+
+  .hero__head .next-chip {
+    position: static;
+    max-width: 100%;
+    margin-top: 1.25rem;
+  }
+
+  .hero__row {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__find {
+    justify-items: start;
+  }
+
+  .hero__popular,
+  .hero__popular ul {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero__search {
+    flex-wrap: wrap;
+    padding: 7px;
+    border-radius: 26px;
+  }
+
+  .hero__search svg {
+    margin-left: 0.7rem;
+  }
+
+  .hero__search .btn {
+    width: 100%;
+  }
+
+  .hero__flapword .flap {
+    --cell-w: min(30px, calc((100vw - 32px - 12px - 16px) / 9.6));
+  }
+}
+
+/* ============ Scenes (category bento) ============ */
+.scenes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(190px, 20vw, 250px);
+  gap: 1rem;
+  list-style: none;
+}
+
+.scene--music { grid-column: 1 / 3; grid-row: 1 / 3; }
+.scene--food { grid-column: 3 / 5; grid-row: 1; }
+.scene--culture { grid-column: 3; grid-row: 2; }
+.scene--tech { grid-column: 4; grid-row: 2; }
+.scene--sports { grid-column: 1 / 3; grid-row: 3; }
+.scene--workshops { grid-column: 3 / 5; grid-row: 3; }
+
+.scene__link {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-l);
+  background: var(--surface-2);
+  color: #fff;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.scene__link img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 0.8s var(--ease-out);
+}
+
+.scene__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, transparent 35%, rgb(10 10 30 / 0.78));
+}
+
+.scene__link:hover img {
+  scale: 1.06;
+}
+
+.scene__text {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.15rem;
+  left: 1.25rem;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.scene__name {
+  font: 750 clamp(1.5rem, 2.6vw, 2.1rem) / 1 var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.scene--music .scene__name {
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+}
+
+.scene__desc {
+  max-width: 34ch;
+  color: rgb(255 255 255 / 0.86);
+  font-size: 0.95rem;
+}
+
+.scene__count {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: var(--cat-bg);
+  color: var(--cat-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.scene__go {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.92);
+  color: #15162e;
+  transition: rotate 0.4s var(--ease-out), background-color 0.3s;
+}
+
+.scene__link:hover .scene__go,
+.scene__link:focus-visible .scene__go {
+  rotate: 45deg;
+  background: var(--marigold);
+}
+
+@media (max-width: 760px) {
+  .scenes {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 170px;
+    gap: 0.75rem;
+  }
+
+  .scenes > .scene {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .scenes > .scene--music,
+  .scenes > .scene--workshops {
+    grid-column: 1 / -1;
+  }
+
+  .scenes > .scene--music {
+    grid-row: span 2;
+  }
+
+  .scene__desc {
+    display: none;
+  }
+
+  .scene--music .scene__desc {
+    display: block;
+  }
+}
+
+/* ============ Featured ============ */
+.section--tight {
+  padding-block: clamp(1rem, 3vw, 2rem) clamp(3rem, 7vw, 5rem);
+}
+
+.feature {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(0.75rem, 1.6vw, 1rem);
+  border-radius: var(--radius-xl);
+  background: var(--cat-bg);
+}
+
+.feature__media {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border-radius: calc(var(--radius-xl) - 8px);
+  background: var(--surface-2);
+}
+
+.feature__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feature__body {
+  padding: clamp(0.5rem, 2vw, 1.5rem) clamp(0.75rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.5rem) 0;
+}
+
+.feature__title {
+  margin: 0.9rem 0 1rem;
+  font: 800 clamp(2.3rem, 4.8vw, 4rem) / 0.96 var(--font-display);
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.feature__meta {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--ink-2);
+  font-weight: 500;
+  list-style: none;
+}
+
+.feature__meta li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.feature__meta svg {
+  flex: none;
+  color: var(--cat-ink);
+}
+
+.feature__blurb {
+  max-width: 44ch;
+  margin: 1.1rem 0 1.6rem;
+  font-size: 1.12rem;
+}
+
+.feature__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.feature__actions p {
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 860px) {
+  .feature {
+    grid-template-columns: 1fr;
+  }
+
+  .feature__media {
+    aspect-ratio: 3 / 2;
+  }
+
+  .feature__body {
+    padding: 0.5rem 0.75rem 1rem;
+  }
+}
+
+.feature .pill:not(.pill--on-photo) {
+  background: var(--surface);
+}

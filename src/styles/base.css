@@ -1,0 +1,585 @@
+/* ============ Design tokens ============
+   Light: white and airy, with festival colours used as soft tints (marigold, rani pink, peacock blue…).
+   Dark: a mela at night: warm charcoal with a hint of plum, lit by marigold.
+   Every colour is written once as light-dark(light, dark). The theme comes from the OS setting,
+   or from the toggle, which sets data-theme on <html> and with it the color-scheme.
+   Bricolage Grotesque for headings, Figtree for reading, Rajdhani for the board and Hindi text. */
+:root {
+  color-scheme: light dark;
+
+  --bg: light-dark(#ffffff, #121015);
+  --bg-soft: light-dark(#f7f7fb, #17141b);
+  --surface: light-dark(#ffffff, #1d1a21);
+  --surface-2: light-dark(#f3f3f8, #27232c);
+  --ink: light-dark(#15162e, #f5f0e9);
+  --ink-2: light-dark(#5b5d7a, #bcb2aa);
+  --ink-3: light-dark(#9a9cb5, #82786f);
+  --line: light-dark(#ebebf2, #2e2933);
+  --line-strong: light-dark(#d7d8e4, #453e4b);
+
+  --marigold: #ffb627;
+  --marigold-hover: #ffc347;
+  --on-marigold: #15162e;
+  --brand-deep: light-dark(#a35f00, #ffc347);
+  --rani: #e5317a;
+  --sindoor: light-dark(#c8361f, #ff8a6b);
+  --on-sindoor: light-dark(#ffffff, #1d0a05);
+  --leaf: light-dark(#17734a, #4cc38a);
+  --ring: light-dark(#4b4ae0, #ffb627);
+
+  --header-bg: light-dark(rgb(255 255 255 / 0.82), rgb(18 16 21 / 0.8));
+  --footer-bg: light-dark(#f7f7fb, #0e0c11);
+  --dot: light-dark(rgb(21 22 46 / 0.16), rgb(255 238 214 / 0.09));
+  --track-rail: light-dark(#cfd0de, #463f4c);
+  --track-sleeper: light-dark(#e6e6ef, #2a252f);
+  --train-coach: light-dark(#3d3aa8, #8b7cf6);
+  --map-land: light-dark(#f7f7fb, #1a171e);
+  --map-dot: light-dark(#cdcedd, #3b3541);
+  --map-edge: light-dark(#b4b6cc, #514957);
+  --phone: light-dark(#15162e, #322d38);
+
+  /* Split-flap board: white flaps by day, dark flaps with marigold letters by night */
+  --board-bg: light-dark(#ffffff, #0c0a0e);
+  --board-frame: light-dark(#e7e7f0, #2b2630);
+  --cell: light-dark(#f7f7fb, #241f29);
+  --cell-2: light-dark(#eeeef5, #1c1820);
+  --cell-line: light-dark(rgb(21 22 46 / 0.1), rgb(0 0 0 / 0.6));
+  --cell-ink: light-dark(#15162e, #f5f0e9);
+  --board-time: light-dark(#a35f00, #f5f0e9);
+  --board-event: light-dark(#15162e, #ffb627);
+  --board-city: light-dark(#5b5d7a, #cfc6bd);
+  --board-head: light-dark(#5b5d7a, #958b83);
+  --board-go: light-dark(#17734a, #5fe3a1);
+  --board-warn: light-dark(#c8361f, #ff8a6b);
+  --board-dim: light-dark(#9a9cb5, #82786f);
+
+  /* Pass */
+  --ticket: light-dark(#ffffff, #241f29);
+  --stub: light-dark(#fff1cc, #121015);
+  --stub-ink: light-dark(#15162e, #f5f0e9);
+  --stub-dim: light-dark(#7a5a12, #a0968e);
+
+  /* Shadows aren't colours, so they get a small dark override below. */
+  --shadow-sm: 0 1px 2px rgb(21 22 46 / 0.06);
+  --shadow: 0 1px 2px rgb(21 22 46 / 0.04), 0 14px 34px -14px rgb(21 22 46 / 0.18);
+  --shadow-lg: 0 2px 6px rgb(21 22 46 / 0.05), 0 34px 70px -24px rgb(21 22 46 / 0.32);
+
+  --font-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+  --font-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-board: 'Rajdhani', 'Figtree', sans-serif;
+  --radius-s: 10px;
+  --radius-m: 16px;
+  --radius-l: 24px;
+  --radius-xl: 32px;
+  --ease-out: cubic-bezier(0.2, 0.75, 0.2, 1);
+  --header-h: 68px;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+    --shadow: 0 14px 34px -14px rgb(0 0 0 / 0.75);
+    --shadow-lg: 0 34px 70px -24px rgb(0 0 0 / 0.9);
+  }
+}
+
+:root[data-theme='dark'] {
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+  --shadow: 0 14px 34px -14px rgb(0 0 0 / 0.75);
+  --shadow-lg: 0 34px 70px -24px rgb(0 0 0 / 0.9);
+}
+
+/* Category colours. Tint and text shades are mixed from the theme, so they work in light and dark. */
+[data-cat='Music'] { --cat: #ffb627; }
+[data-cat='Culture'] { --cat: #e5317a; }
+[data-cat='Food'] { --cat: #f26b1d; }
+[data-cat='Tech'] { --cat: #3d6ef5; }
+[data-cat='Sports'] { --cat: #1ea365; }
+[data-cat='Workshops'] { --cat: #8b5cf6; }
+
+[data-cat] {
+  --cat-bg: color-mix(in srgb, var(--cat) 14%, var(--surface));
+  --cat-ink: color-mix(in srgb, var(--cat) 50%, var(--ink));
+}
+
+/* ============ Base ============ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: contents;
+}
+
+main {
+  flex: 1;
+}
+
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure, fieldset {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+[lang='hi'] {
+  font-family: var(--font-board);
+}
+
+:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+main:focus,
+[data-page-title]:focus {
+  outline: none;
+}
+
+::selection {
+  background: var(--marigold);
+  color: var(--on-marigold);
+}
+
+.container {
+  width: min(100% - 32px, 1240px);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: min(100% - 64px, 1240px);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============ Sections ============ */
+.section {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+.section--soft {
+  background: var(--bg-soft);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.section-title {
+  font: 750 clamp(2rem, 4vw, 3.1rem) / 1.02 var(--font-display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.section-sub {
+  max-width: 46ch;
+  margin-top: 0.6rem;
+  color: var(--ink-2);
+  font-size: 1.08rem;
+}
+
+.page-title {
+  font: 750 clamp(2.4rem, 5vw, 3.75rem) / 1 var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+/* The title block at the top of inner pages. */
+.page-head {
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+.page-sub {
+  max-width: 56ch;
+  margin-top: 0.9rem;
+  color: var(--ink-2);
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+}
+
+/* ============ Buttons ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.6rem 1.35rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 1rem / 1.1 var(--font-body);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.25s, translate 0.2s var(--ease-out), scale 0.15s;
+}
+
+.btn svg {
+  flex: none;
+}
+
+.btn:hover {
+  border-color: var(--ink);
+}
+
+.btn:active {
+  scale: 0.97;
+}
+
+.btn--primary {
+  border-color: transparent;
+  background: var(--marigold);
+  box-shadow: 0 8px 20px -8px rgb(255 160 0 / 0.65);
+  color: var(--on-marigold);
+}
+
+.btn--primary:hover {
+  border-color: transparent;
+  background: var(--marigold-hover);
+  box-shadow: 0 12px 26px -10px rgb(255 160 0 / 0.75);
+  translate: 0 -1px;
+}
+
+.btn--dark {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn--dark:hover {
+  border-color: var(--ink);
+  translate: 0 -1px;
+}
+
+.btn--danger {
+  border-color: var(--sindoor);
+  background: var(--sindoor);
+  color: var(--on-sindoor);
+}
+
+.btn--danger:hover {
+  border-color: var(--ink);
+}
+
+.btn--danger-ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--sindoor);
+}
+
+.btn--danger-ghost:hover {
+  border-color: var(--sindoor);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+/* ============ Chips & pills ============ */
+.chip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 42px;
+  padding: 0.35rem 1rem;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.chip::before {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--cat, var(--ink-3));
+}
+
+.chip:hover {
+  border-color: var(--line-strong);
+  background: var(--cat-bg, var(--surface-2));
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--cat-ink, var(--ink));
+  background: var(--cat-bg, var(--ink));
+  color: var(--cat-ink, var(--bg));
+}
+
+.chip__count {
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: var(--cat-bg, var(--surface-2));
+  color: var(--cat-ink, var(--ink));
+  font: 700 0.8rem / 1.2 var(--font-body);
+  white-space: nowrap;
+}
+
+.pill::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--cat, var(--ink-3));
+}
+
+/* Over photos the pill gets a solid backing so it stays legible. */
+.pill--on-photo {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+/* ============ Split-flap cells (board + countdowns) ============ */
+.flap {
+  --cell-w: 20px;
+  --gap: 2px;
+  display: flex;
+  flex: none;
+  gap: var(--gap);
+}
+
+.flap__cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--cell-w);
+  height: calc(var(--cell-w) * 1.5);
+  border-radius: 4px;
+  background: linear-gradient(var(--cell) 0 50%, var(--cell-2) 50% 100%);
+  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 0.04);
+  color: var(--cell-ink);
+  font: 700 calc(var(--cell-w) * 1.02) / 1 var(--font-board);
+  white-space: pre;
+}
+
+.flap__cell::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1px;
+  background: var(--cell-line);
+}
+
+/* ============ Empty states ============ */
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius-l);
+  background: var(--bg-soft);
+  text-align: center;
+}
+
+.empty h2,
+.empty h3 {
+  font: 700 1.6rem / 1.15 var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.empty p {
+  max-width: 46ch;
+  color: var(--ink-2);
+}
+
+/* ============ Not found ============ */
+.notfound {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1rem;
+  min-height: 60vh;
+  padding-block: 4rem;
+}
+
+.notfound__code {
+  font: 800 clamp(6rem, 20vw, 12rem) / 0.8 var(--font-display);
+  letter-spacing: -0.05em;
+  color: var(--marigold);
+}
+
+.notfound p:not(.notfound__code) {
+  max-width: 48ch;
+  color: var(--ink-2);
+}
+
+/* ============ Feedback motion ============ */
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petals i {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 80% 0 80% 0;
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+/* The pulsing green "live" dot used by clocks and countdowns. */
+@keyframes live {
+  50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--board-go) 0%, transparent); }
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* ============ View transitions ============ */
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+}
+
+::view-transition-group(event-photo) {
+  animation-duration: 0.55s;
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-old(event-photo),
+::view-transition-new(event-photo) {
+  height: 100%;
+  object-fit: cover;
+}
+
+.theme-switching::view-transition-old(root),
+.theme-switching::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

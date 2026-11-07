@@ -1,0 +1,100 @@
+/* A labelled form field with a hint or an error underneath. Shared by every form. */
+.field {
+  display: grid;
+  align-content: start; /* side-by-side fields keep their inputs the same height */
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field > label,
+.field > legend {
+  padding: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* The field's own text controls only: dropdowns and pickers (.ss) style the inputs inside them. */
+.field input:not(.ss *),
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.55rem 0.85rem 0.45rem;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background-color: var(--bg-soft);
+  color: var(--ink);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+
+.field input:not(.ss *):focus-visible,
+.field textarea:focus-visible {
+  outline: none;
+  border-color: var(--ring);
+  background-color: var(--surface);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ring) 20%, transparent);
+}
+
+.field.has-error input:not(.ss *),
+.field.has-error textarea,
+.field.has-error .input-prefix span {
+  border-color: var(--sindoor);
+}
+
+.field__hint {
+  color: var(--ink-2);
+  font-size: 0.86rem;
+}
+
+.field__error {
+  display: flex;
+  gap: 0.4rem;
+  color: var(--sindoor);
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.field__error::before {
+  content: '!';
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.08rem;
+  border-radius: 50%;
+  background: var(--sindoor);
+  color: var(--on-sindoor);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.input-prefix {
+  display: flex;
+}
+
+.input-prefix span {
+  display: grid;
+  place-items: center;
+  padding: 0.1rem 0.75rem 0;
+  border: 1.5px solid var(--line);
+  border-right: 0;
+  border-radius: 14px 0 0 14px;
+  background: var(--surface-2);
+  font-weight: 600;
+}
+
+.input-prefix input {
+  border-radius: 0 14px 14px 0;
+}
+
+.field textarea {
+  min-height: 96px;
+  padding-block: 0.7rem;
+  line-height: 1.5;
+  resize: vertical;
+}

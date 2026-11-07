@@ -1,0 +1,205 @@
+.ss {
+  position: relative;
+}
+
+.ss__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  min-height: 50px;
+  padding: 0 0.9rem 0 1rem;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-soft);
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.ss__trigger:hover {
+  border-color: var(--line-strong);
+}
+
+.ss__trigger:focus-visible,
+.ss.is-open .ss__trigger {
+  outline: none;
+  border-color: var(--ring);
+  background: var(--surface);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ring) 20%, transparent);
+}
+
+.ss__trigger[aria-invalid='true'] {
+  border-color: var(--sindoor);
+}
+
+.ss__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ss__value.is-placeholder {
+  color: var(--ink-3);
+}
+
+.ss__chevron {
+  flex: none;
+  color: var(--ink-2);
+  transition: rotate 0.25s var(--ease-out);
+}
+
+.ss.is-open .ss__chevron {
+  rotate: 180deg;
+}
+
+.ss__dot {
+  flex: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--cat);
+}
+
+/* ---- The dropdown panel ---- */
+.ss__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 30;
+  width: max(100%, 280px);
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  transform-origin: top;
+  transition: opacity 0.18s, translate 0.22s var(--ease-out), scale 0.22s var(--ease-out);
+}
+
+.ss.is-up .ss__panel {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform-origin: bottom;
+}
+
+@starting-style {
+  .ss__panel {
+    opacity: 0;
+    translate: 0 -6px;
+    scale: 0.98;
+  }
+}
+
+.ss__search {
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.ss__search svg {
+  position: absolute;
+  top: 50%;
+  left: 0.85rem;
+  color: var(--ink-2);
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.ss__search input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 0.9rem 0 2.4rem;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-soft);
+  color: var(--ink);
+  font-size: 0.98rem;
+}
+
+.ss__search input:focus-visible {
+  outline: none;
+  border-color: var(--ring);
+}
+
+.ss__list {
+  display: grid;
+  gap: 2px;
+  max-height: 272px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  scrollbar-width: thin;
+}
+
+.ss__option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.45rem 0.7rem;
+  border-radius: 10px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.ss__option.is-active {
+  background: var(--surface-2);
+}
+
+.ss__option[aria-selected='true'] {
+  font-weight: 700;
+}
+
+.ss__option[aria-disabled='true'] {
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+.ss__text {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.ss__text small {
+  overflow: hidden;
+  color: var(--ink-2);
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ss__text mark {
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--marigold) 45%, transparent);
+  color: inherit;
+}
+
+.ss__icon {
+  flex: none;
+  color: var(--ink-2);
+}
+
+.ss__check {
+  color: var(--leaf);
+}
+
+.ss__empty {
+  padding: 0.9rem 0.7rem;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+}
+
+/* Lift the field whose list is open above the fields after it. (The shake on invalid fields leaves a
+   transform behind, which would otherwise trap the panel's z-index inside its own field.) */
+.field:has(.ss.is-open) {
+  position: relative;
+  z-index: 40;
+}

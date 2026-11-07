@@ -1,0 +1,490 @@
+.journey__pin {
+  display: grid;
+  grid-template-columns: minmax(0, 620px) auto;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+/* ============ Stops on a rail ============ */
+.journey__steps {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+  margin: 2rem 0 1.75rem;
+  list-style: none;
+}
+
+.journey__rail {
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 31px;
+  width: 4px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(180deg, var(--line-strong) 0 6px, transparent 6px 11px);
+}
+
+.journey__fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--marigold), #ff8a3d, var(--rani));
+  transform: scaleY(var(--p, 0.34));
+  transform-origin: top;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.journey__btn {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  width: 100%;
+  padding: 0.9rem 1.1rem 0.9rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-l);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.journey__step.is-on .journey__btn {
+  border-color: var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.journey__dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bg-soft);
+  color: var(--ink-2);
+  font: 700 1.15rem / 1 var(--font-board);
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s, scale 0.35s var(--ease-out);
+}
+
+.journey__step.is-done .journey__dot,
+.journey__step.is-on .journey__dot {
+  border-color: var(--marigold);
+  background: var(--marigold);
+  color: var(--on-marigold);
+}
+
+.journey__step.is-on .journey__dot {
+  scale: 1.08;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--marigold) 25%, transparent);
+}
+
+.journey__body {
+  display: grid;
+  grid-template-rows: auto auto 0fr;
+  align-content: start;
+  padding-top: 0.15rem;
+  transition: grid-template-rows 0.45s var(--ease-out);
+}
+
+.journey__step.is-on .journey__body {
+  grid-template-rows: auto auto 1fr;
+}
+
+.journey__kicker {
+  color: var(--brand-deep);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.journey__body strong {
+  font: 750 clamp(1.3rem, 2vw, 1.6rem) / 1.15 var(--font-display);
+  letter-spacing: -0.025em;
+}
+
+/* The details open like an accordion for the current stop (grid rows 0fr -> 1fr). */
+.journey__more {
+  display: grid;
+  gap: 0.7rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.journey__text {
+  display: block;
+  max-width: 46ch;
+  margin-top: 0.4rem;
+  color: var(--ink-2);
+}
+
+.journey__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-bottom: 0.2rem;
+}
+
+.journey__tags span {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.journey__step:not(.is-on) .journey__body strong {
+  color: var(--ink-2);
+}
+
+/* ============ Phone ============ */
+.journey__stage {
+  --ph: min(600px, calc(100svh - 200px));
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.journey__counter {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.journey__counter .flap {
+  --cell-w: 22px;
+  --gap: 2px;
+}
+
+.journey__counter .flap__cell {
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px var(--board-frame);
+  color: var(--board-event);
+}
+
+.phone {
+  position: relative;
+  width: calc(var(--ph) * 0.49);
+  min-width: 270px;
+  height: var(--ph);
+  min-height: 550px;
+  padding: 10px;
+  border-radius: 48px;
+  background: var(--phone);
+  box-shadow: var(--shadow-lg), inset 0 0 0 1.5px rgb(255 255 255 / 0.12);
+  rotate: 2deg;
+}
+
+.phone__screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 38px;
+  background: var(--bg);
+  --notch-bg: var(--bg);
+}
+
+.phone__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 1.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.phone__island {
+  width: 86px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--phone);
+}
+
+.screen {
+  position: absolute;
+  inset: 44px 14px 14px;
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: translateX(34px) scale(0.98);
+  transition: opacity 0.4s, transform 0.55s var(--ease-out);
+  pointer-events: none;
+}
+
+.screen.is-past {
+  transform: translateX(-34px) scale(0.98);
+}
+
+.screen.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.screen__title {
+  font: 750 1.2rem / 1.1 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.screen__title--ok {
+  color: var(--leaf);
+}
+
+/* Text "types" itself in by unclipping from left to right. */
+.typed {
+  display: inline-block;
+  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+}
+
+.screen.is-on .typed {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.9s steps(14, end) 0.35s;
+}
+
+.demo-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  border: 1.5px solid var(--ring);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.demo-chips {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.demo-chip {
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.demo-chip.is-on {
+  border-color: var(--cat-ink);
+  background: var(--cat-bg);
+  color: var(--cat-ink);
+}
+
+.demo-results {
+  display: grid;
+  gap: 0.55rem;
+  list-style: none;
+}
+
+.demo-result {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  translate: 0 12px;
+  transition: opacity 0.4s, translate 0.5s var(--ease-out);
+}
+
+.screen.is-on .demo-result { opacity: 1; translate: 0 0; transition-delay: 1.3s; }
+.screen.is-on .demo-result:nth-child(2) { transition-delay: 1.42s; }
+.screen.is-on .demo-result:nth-child(3) { transition-delay: 1.54s; }
+.screen.is-on .demo-result:nth-child(4) { transition-delay: 1.66s; }
+
+.demo-count {
+  color: var(--ink-2);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.demo-result img {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.demo-result span {
+  display: grid;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.demo-result strong,
+.demo-event strong {
+  overflow: hidden;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.demo-result small,
+.demo-event small {
+  color: var(--ink-2);
+  font-size: 0.7rem;
+}
+
+.demo-result b {
+  font: 800 0.9rem var(--font-display);
+}
+
+.demo-event {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.45rem 0.45rem 0.6rem;
+  border-radius: 18px;
+  background: var(--cat-bg);
+}
+
+.demo-event img {
+  width: 100%;
+  height: 92px;
+  border-radius: 13px;
+  object-fit: cover;
+}
+
+.demo-event span {
+  display: grid;
+  min-width: 0;
+  padding-inline: 0.2rem;
+  line-height: 1.25;
+}
+
+.demo-form {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.demo-field {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.demo-input {
+  min-height: 34px;
+  padding: 0.45rem 0.7rem;
+  border: 1.5px solid var(--line);
+  border-radius: 11px;
+  background: var(--bg-soft);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.screen.is-on .demo-field:nth-child(2) .typed { transition-delay: 1.15s; }
+.screen.is-on .demo-field:nth-child(3) .typed { transition-delay: 1.95s; }
+
+.demo-stepper {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  align-items: center;
+  justify-items: center;
+  min-height: 34px;
+  border: 1.5px solid var(--line);
+  border-radius: 11px;
+  font-size: 0.9rem;
+}
+
+.demo-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.45rem;
+  border-top: 1.5px dashed var(--line-strong);
+  color: var(--ink-2);
+  font-size: 0.8rem;
+}
+
+.demo-total b {
+  color: var(--ink);
+  font: 800 1rem var(--font-display);
+}
+
+.demo-button {
+  display: grid;
+  place-items: center;
+  min-height: 38px;
+  border-radius: 999px;
+  background: var(--marigold);
+  color: var(--on-marigold);
+  font-size: 0.82rem;
+  font-weight: 700;
+  scale: 0.9;
+  opacity: 0.4;
+  transition: scale 0.4s var(--ease-out), opacity 0.4s;
+}
+
+.screen.is-on .demo-button {
+  scale: 1;
+  opacity: 1;
+  transition-delay: 2.8s;
+}
+
+.screen .ticket__title {
+  padding-right: 0;
+  font-size: 1.15rem;
+}
+
+/* The stamp straddles the perforation, half on the pass and half on the stub. */
+.screen .ticket__stamp {
+  top: auto;
+  right: 0.8rem;
+  bottom: -0.95rem;
+  z-index: 2;
+  background: var(--ticket);
+  font-size: 0.72rem;
+}
+
+.screen .ticket__main {
+  padding: 0.9rem 1rem;
+}
+
+.screen .ticket__grid {
+  gap: 0.35rem 0.75rem;
+  font-size: 0.82rem;
+}
+
+.screen .ticket__pnr strong {
+  font-size: 1.2rem;
+}
+
+.screen .barcode {
+  height: 34px;
+}
+
+.demo-note {
+  color: var(--ink-2);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* ============ Smaller screens: one column, phone below the stops ============ */
+@media (max-width: 959px) {
+  .journey__pin {
+    grid-template-columns: 1fr;
+  }
+
+  .journey__stage {
+    --ph: 580px;
+  }
+
+  .phone {
+    rotate: 0deg;
+  }
+}
+

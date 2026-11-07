@@ -1,0 +1,108 @@
+.register {
+  display: grid;
+  gap: 1rem;
+}
+
+.register__title {
+  font: 750 1.65rem / 1.1 var(--font-display);
+  letter-spacing: -0.025em;
+}
+
+.register__note {
+  margin-top: -0.6rem;
+  color: var(--ink-2);
+  font-size: 0.9rem;
+}
+
+/* Passes: a number box with − and + buttons either side. */
+.stepper {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) 50px;
+  gap: 0.5rem;
+}
+
+.stepper input {
+  font: 750 1.25rem / 1 var(--font-display);
+  text-align: center;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.stepper input::-webkit-inner-spin-button,
+.stepper input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.stepper__btn {
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color 0.2s, background-color 0.2s, scale 0.15s;
+}
+
+.stepper__btn:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.stepper__btn:active:not(:disabled) {
+  scale: 0.94;
+}
+
+.stepper__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.register__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 0.8rem;
+  border-top: 1.5px dashed var(--line-strong);
+  color: var(--ink-2);
+}
+
+.register__total strong {
+  color: var(--ink);
+  font: 800 1.7rem / 1 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.confirm {
+  display: grid;
+  gap: 1rem;
+}
+
+.confirm__head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--leaf);
+}
+
+.confirm__head h3 {
+  color: var(--ink);
+  font: 800 1.9rem / 1 var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.confirm > p {
+  color: var(--ink-2);
+}
+
+.confirm__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.confirm .link-btn {
+  justify-self: start;
+}

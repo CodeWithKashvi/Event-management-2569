@@ -1,0 +1,76 @@
+.passes-page {
+  padding-block: 2.5rem 4.5rem;
+}
+
+.passes-page__lede {
+  margin: 0.5rem 0 2rem;
+  color: var(--ink-2);
+}
+
+.passes-page .empty {
+  max-width: 640px;
+  margin-top: 2rem;
+}
+
+.pass-list {
+  --notch-bg: var(--bg);
+  display: grid;
+  gap: 2rem;
+  max-width: 760px;
+  list-style: none;
+}
+
+.pass-list__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.passes-page__fine {
+  max-width: 60ch;
+  margin-top: 3rem;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+}
+
+.dialog {
+  width: min(460px, calc(100vw - 32px));
+  padding: 1.5rem;
+  border: 0;
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.5);
+  opacity: 1;
+  scale: 1;
+  transition: opacity 0.2s, scale 0.25s var(--ease-out), overlay 0.25s allow-discrete, display 0.25s allow-discrete;
+}
+
+@starting-style {
+  .dialog[open] {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+.dialog::backdrop {
+  background: light-dark(rgb(10 12 39 / 0.6), rgb(6 4 8 / 0.7));
+}
+
+.dialog h2 {
+  font: 750 1.6rem / 1.1 var(--font-display);
+  letter-spacing: -0.025em;
+}
+
+.dialog p {
+  margin: 0.6rem 0 1.4rem;
+  color: var(--ink-2);
+}
+
+.dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}

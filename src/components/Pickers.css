@@ -1,0 +1,292 @@
+/* Date and time pickers. The trigger and panel come from SearchSelect.css; this adds what's inside. */
+.picker__icon {
+  flex: none;
+  color: var(--ink-2);
+}
+
+.picker__panel {
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 12px;
+}
+
+/* ============ Date: quick picks ============ */
+.picker__presets {
+  display: flex;
+  gap: 6px;
+  padding-bottom: 10px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.picker__preset {
+  flex: 1;
+  min-height: 36px;
+  padding: 0 0.6rem;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.picker__preset:hover {
+  border-color: var(--line-strong);
+}
+
+.picker__preset[aria-pressed='true'] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ============ Date: the calendar (react-day-picker, styled like shadcn/ui) ============ */
+.picker .rdp-root {
+  --rdp-accent-color: var(--ink);
+  --rdp-accent-background-color: var(--surface-2);
+  --rdp-day-width: 40px;
+  --rdp-day-height: 40px;
+  --rdp-day_button-width: 36px;
+  --rdp-day_button-height: 36px;
+  --rdp-day_button-border-radius: 10px;
+  --rdp-day_button-border: 0;
+  --rdp-selected-border: 0;
+  --rdp-nav-height: 40px;
+  --rdp-nav_button-width: 34px;
+  --rdp-nav_button-height: 34px;
+  --rdp-outside-opacity: 0.35;
+  --rdp-disabled-opacity: 0.3;
+  --rdp-weekday-opacity: 1;
+  --rdp-weekday-padding: 0.4rem 0;
+  --rdp-animation_duration: 0.28s;
+  font-size: 0.92rem;
+}
+
+.picker .rdp-month_caption {
+  align-items: center;
+  font: 700 1rem / 1 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.picker .rdp-button_previous,
+.picker .rdp-button_next {
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+/* The arrows sit inside the 40px nav row, so centre them vertically. */
+.picker .rdp-root[data-nav-layout='around'] .rdp-button_previous,
+.picker .rdp-root[data-nav-layout='around'] .rdp-button_next {
+  top: 3px;
+  height: var(--rdp-nav_button-height);
+}
+
+.picker .rdp-button_previous:hover:not(:disabled),
+.picker .rdp-button_next:hover:not(:disabled) {
+  border-color: var(--line-strong);
+  background: var(--surface-2);
+}
+
+.picker .rdp-chevron {
+  fill: none;
+}
+
+.picker .rdp-weekday {
+  color: var(--ink-2);
+  font: 700 0.72rem / 1 var(--font-board);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.picker .rdp-day_button {
+  position: relative;
+  margin-inline: auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.picker .rdp-day_button:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.picker .rdp-day_button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+
+/* Sundays in red, as on the Calendar page. */
+.picker .rdp-weekday:last-child,
+.picker .rdp-week .rdp-day:last-child {
+  color: var(--sindoor);
+}
+
+.picker .rdp-today:not(.rdp-outside) .rdp-day_button {
+  background: color-mix(in srgb, var(--marigold) 26%, var(--surface));
+  color: var(--ink);
+}
+
+.picker .rdp-selected {
+  font-size: inherit;
+}
+
+.picker .rdp-selected .rdp-day_button,
+.picker .rdp-selected .rdp-day_button:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* A festival is a small lamp under the date. */
+.picker .rdp-day.is-fest .rdp-day_button::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--marigold);
+  box-shadow: 0 0 5px var(--marigold);
+  translate: -50% 0;
+}
+
+.picker .rdp-footer {
+  margin-top: 6px;
+}
+
+.picker__fests {
+  display: grid;
+  gap: 2px;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--marigold) 10%, var(--surface));
+  color: var(--ink-2);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.picker__fests strong {
+  display: inline-block;
+  min-width: 3.4rem;
+  color: var(--brand-deep);
+  font-weight: 700;
+}
+
+.picker__fests [lang='hi'] {
+  color: var(--ink-3);
+}
+
+/* ============ Time ============ */
+.tp {
+  display: grid;
+  gap: 12px;
+  width: 316px;
+}
+
+.tp__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 2px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tp__flap {
+  --cell-w: 22px;
+}
+
+.tp__zone {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font: 700 0.75rem / 1.2 var(--font-board);
+  letter-spacing: 0.1em;
+}
+
+.tp__group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* .tp in front so the form's own fieldset legend style (Host.css) doesn't reach these. */
+.tp .tp__group legend {
+  margin-bottom: 6px;
+  padding: 0;
+  color: var(--ink-2);
+  font: 700 0.72rem / 1 var(--font-board);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tp__opts {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 5px;
+}
+
+.tp__row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+/* Each option is a real radio button (arrow keys move along a row), drawn as a key. */
+.tp__opt {
+  position: relative;
+}
+
+.tp__opt input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.tp__opt span {
+  display: grid;
+  place-items: center;
+  height: 40px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-soft);
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s, background-color 0.15s, color 0.15s, scale 0.12s;
+}
+
+.tp__opt:hover span {
+  border-color: var(--line-strong);
+}
+
+.tp__opt:active span {
+  scale: 0.95;
+}
+
+.tp__opt input:checked + span {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.tp__opt input:focus-visible + span {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.tp__done {
+  min-height: 44px;
+}

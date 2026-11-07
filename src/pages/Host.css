@@ -1,0 +1,252 @@
+.host {
+  padding-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+.host__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+/* ============ Form ============ */
+.host-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.host-form__note {
+  color: var(--ink-2);
+  font-size: 0.92rem;
+}
+
+.host-group {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(1.1rem, 2.5vw, 1.6rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.host-group legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 0.25rem;
+  padding: 0;
+  font: 750 1.25rem / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.host-group legend + * {
+  clear: both;
+}
+
+.host-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.check label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  cursor: pointer;
+}
+
+.check input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0.1rem 0 0;
+  accent-color: var(--marigold);
+}
+
+.check.has-error input {
+  outline: 2px solid var(--sindoor);
+  outline-offset: 2px;
+}
+
+.check .field__error {
+  margin: 0.4rem 0 0 2.1rem;
+}
+
+/* ============ Live preview ============ */
+.host__preview {
+  position: sticky;
+  top: calc(var(--header-h) + 1rem);
+  display: grid;
+  gap: 0.8rem;
+}
+
+.host__preview-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.host__live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--board-go);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--board-go) 22%, transparent);
+  animation: live 1.6s ease-in-out infinite;
+}
+
+.host__preview-tip {
+  color: var(--ink-2);
+  font-size: 0.85rem;
+}
+
+/* No photo yet, so the preview gets a generated poster in the category's colour. */
+.host-preview__poster {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 25% 20%, color-mix(in srgb, var(--cat) 55%, transparent), transparent 55%),
+    radial-gradient(circle at 80% 85%, color-mix(in srgb, var(--cat) 35%, transparent), transparent 50%),
+    var(--cat-bg);
+  transition: background 0.4s;
+}
+
+.host-preview__icon {
+  width: 72px;
+  height: 72px;
+  color: var(--cat-ink);
+  stroke-width: 1.5;
+}
+
+.host-preview__mark {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.4rem;
+  color: color-mix(in srgb, var(--cat-ink) 35%, transparent);
+  font: 700 2.4rem / 1 var(--font-board);
+}
+
+.host-preview .event-card__title {
+  overflow-wrap: anywhere;
+}
+
+/* ============ Submitted ============ */
+.host-done {
+  display: grid;
+  justify-items: start;
+  gap: 0.8rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.host-done__icon {
+  width: 48px;
+  height: 48px;
+  color: var(--leaf);
+}
+
+.host-done h2 {
+  font: 800 clamp(1.8rem, 3.5vw, 2.6rem) / 1 var(--font-display);
+  letter-spacing: -0.035em;
+}
+
+.host-done h2:focus {
+  outline: none;
+}
+
+.host-done__ref {
+  font-family: var(--font-board);
+  letter-spacing: 0.05em;
+}
+
+.host-done__note {
+  max-width: 52ch;
+  color: var(--ink-2);
+}
+
+.host-done__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+/* ============ Your listings ============ */
+.host-mine {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+.host-mine .section-title {
+  margin-bottom: 1rem;
+}
+
+.host-mine__list {
+  display: grid;
+  gap: 0.6rem;
+  list-style: none;
+}
+
+.host-mine__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--cat);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.host-mine__main {
+  display: grid;
+  min-width: 0;
+}
+
+.host-mine__main span {
+  color: var(--ink-2);
+  font-size: 0.9rem;
+}
+
+.host-mine__status {
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .host__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .host__preview {
+    position: static;
+    order: -1;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 560px) {
+  .host-row {
+    grid-template-columns: 1fr;
+  }
+
+  .host-mine__item {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .host-mine__item .pill,
+  .host-mine__status {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

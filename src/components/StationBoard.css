@@ -1,0 +1,85 @@
+/* ---- Stations: yellow Indian Railways signboards on two posts ---- */
+.stations__list {
+  --post: color-mix(in srgb, var(--ink) 85%, transparent);
+  display: grid;
+  grid-auto-columns: minmax(118px, 1fr);
+  grid-auto-flow: column;
+  padding: 0.35rem 16px 0;
+  margin: 0 -16px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  list-style: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+}
+
+/* Each board brings its own stretch of platform; side by side they form one long ground line. */
+.stations__list > li {
+  padding-inline: 0.375rem;
+  border-bottom: 3px solid var(--post);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 1100px) {
+  .stations__list {
+    grid-auto-columns: 1fr;
+    padding-inline: 0;
+    margin: 0;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+.station {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding: 0.5rem 0.5rem 0.45rem;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  background: #ffd21f;
+  box-shadow: inset 0 0 0 2px #14142b, 0 6px 14px -8px rgb(120 90 0 / 0.6);
+  color: #14142b !important;
+  text-decoration: none;
+  transition: translate 0.3s var(--ease-out), box-shadow 0.3s;
+}
+
+.station::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  height: 16px;
+  background: linear-gradient(90deg, transparent 22%, var(--post) 22% calc(22% + 4px), transparent 0 calc(78% - 4px), var(--post) 0 78%, transparent 0);
+}
+
+.station:hover {
+  translate: 0 -4px;
+  box-shadow: inset 0 0 0 2px #14142b, 0 12px 22px -10px rgb(120 90 0 / 0.7);
+}
+
+.station__hi {
+  font: 700 1.2rem / 1.2 var(--font-board);
+}
+
+.station__en {
+  font: 700 0.84rem / 1.2 var(--font-board);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Where a real board shows the height above sea level, ours shows how many events there are. */
+.station__meta {
+  margin-top: 0.2rem;
+  padding-top: 0.15rem;
+  border-top: 1px solid rgb(20 20 43 / 0.35);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.station[aria-current='page'] {
+  box-shadow: inset 0 0 0 2px #14142b, 0 0 0 4px var(--surface), 0 0 0 7px var(--marigold);
+}
