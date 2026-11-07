@@ -15,8 +15,9 @@
   font-weight: 600;
 }
 
-/* The field's own text controls only: dropdowns and pickers (.ss) style the inputs inside them. */
-.field input:not(.ss *),
+/* The field's own text controls only: dropdowns and pickers (.ss) style the inputs inside them.
+   :where() keeps the specificity as plain `.field input`, so .input-prefix and .stepper still win. */
+.field input:where(:not(.ss *)),
 .field textarea {
   width: 100%;
   min-height: 48px;
@@ -30,7 +31,7 @@
 }
 
 
-.field input:not(.ss *):focus-visible,
+.field input:where(:not(.ss *)):focus-visible,
 .field textarea:focus-visible {
   outline: none;
   border-color: var(--ring);
@@ -38,7 +39,7 @@
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--ring) 20%, transparent);
 }
 
-.field.has-error input:not(.ss *),
+.field.has-error input:where(:not(.ss *)),
 .field.has-error textarea,
 .field.has-error .input-prefix span {
   border-color: var(--sindoor);
